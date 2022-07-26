@@ -30,6 +30,8 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.jetpackcomposetutorial.models.UserDetails
+import com.example.jetpackcomposetutorial.ui.composables.UserListComponents
 import com.example.jetpackcomposetutorial.ui.theme.JetpackComposeTutorialTheme
 import kotlinx.coroutines.launch
 
@@ -44,10 +46,26 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background,
                 ) {
 //                    ScrollableComponent()
-                    ShowList()
+//                    ShowList()
+                    UserListComponents(users = getListOfUsers())
                 }
             }
         }
+    }
+
+    private fun getListOfUsers(): List<UserDetails> {
+        val list = mutableListOf<UserDetails>()
+        for(i in 0..101){
+            list.add(
+                UserDetails(
+                    "Dummy name $i",
+                    "Dummy Address $i",
+                    "22-07-200${i}",
+                    "724-${i}-467"
+                )
+            )
+        }
+        return list
     }
 }
 
