@@ -3,6 +3,7 @@ package com.example.jetpackcomposetutorial.ui.composables
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -26,6 +27,7 @@ fun ScreenHello(navHostController: NavHostController){
     Box(
         modifier = Modifier
             .fillMaxWidth()
+            .fillMaxHeight()
             .background(color = Color.Red),
         contentAlignment = Alignment.Center
     ) {
@@ -46,6 +48,7 @@ fun ScreenBye(
     Box(
         modifier = Modifier
             .fillMaxWidth()
+            .fillMaxHeight()
             .background(color = Color.Blue),
         contentAlignment = Alignment.Center
     ) {
