@@ -67,8 +67,8 @@ fun BottomNavigationView(
     navController: NavController
 ){
     val items = listOf(
-        "Hello",
-        "Bye"
+        "hello",
+        "bye"
     )
     
     BottomNavigation(
