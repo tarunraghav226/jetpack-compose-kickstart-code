@@ -18,7 +18,9 @@ fun DrawerView(
     navController: NavController,
     menuItems: List<MenuItem>
 ){
-    Column(modifier = Modifier.fillMaxWidth()) {
+    Column(modifier = Modifier
+        .fillMaxWidth()
+    ) {
         DrawerHeader()
         DrawerItems(menuItems = menuItems, navController = navController)
     }
@@ -30,9 +32,10 @@ fun DrawerItems(menuItems: List<MenuItem>, navController: NavController){
         items(menuItems){
             item -> 
             Row(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .clickable {
-                            navController.navigate(item.id){
+                        navController.navigate(item.id) {
                             navController.graph.startDestinationRoute?.let { screen_route ->
                                 popUpTo(screen_route) {
                                     saveState = true
@@ -56,12 +59,12 @@ fun DrawerItems(menuItems: List<MenuItem>, navController: NavController){
 fun DrawerHeader(){
     Box(
         modifier = Modifier
-            .fillMaxHeight()
+            .fillMaxWidth()
             .padding(vertical = 60.dp),
     ){
         Text(
             text = "Your image here",
-            modifier = Modifier.fillMaxHeight(),
+            modifier = Modifier.fillMaxWidth(),
             fontSize = 60.sp
         )
     }
