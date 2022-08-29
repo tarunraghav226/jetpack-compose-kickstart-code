@@ -11,12 +11,18 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExitToApp
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.ImageSearch
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -32,10 +38,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.jetpackcomposetutorial.models.MenuItem
 import com.example.jetpackcomposetutorial.models.UserDetails
 import com.example.jetpackcomposetutorial.navigation.CustomNavHost
 import com.example.jetpackcomposetutorial.ui.composables.BottomNavigationView
 import com.example.jetpackcomposetutorial.ui.composables.UserListComponents
+import com.example.jetpackcomposetutorial.ui.composables.drawer.DrawerView
+import com.example.jetpackcomposetutorial.ui.composables.topbar.SimpleTopBar
 import com.example.jetpackcomposetutorial.ui.theme.JetpackComposeTutorialTheme
 import kotlinx.coroutines.launch
 
@@ -43,8 +52,22 @@ class MainActivity : ComponentActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val menuItems = listOf(
+            MenuItem(
+                name = "Home",
+                id = "hello",
+                icon = Icons.Default.Home
+            ),
+            MenuItem(
+                name = "Exit",
+                id = "bye",
+                icon = Icons.Default.ExitToApp
+            )
+        )
         setContent {
             val navController = rememberNavController()
+            val scaffoldState = rememberScaffoldState()
+            val scope = rememberCoroutineScope()
             JetpackComposeTutorialTheme {
                 // A surface container using the 'background' color from the theme
 //                Surface(
@@ -56,7 +79,10 @@ class MainActivity : ComponentActivity() {
 //                    UserListComponents(users = getListOfUsers())
 //                }
                 Scaffold(
-                    bottomBar = {BottomNavigationView(navController = navController)}
+                    scaffoldState=scaffoldState,
+                    topBar = { SimpleTopBar(scope, scaffoldState) },
+                    bottomBar = {BottomNavigationView(navController = navController)},
+                    drawerContent = {DrawerView(navController, menuItems)}
                 ) {
                     CustomNavHost(navController = navController)
                 }
